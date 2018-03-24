@@ -1,0 +1,11 @@
+= form_with(model: monster, local: true) do |form|
+  - if monster.errors.any?
+    #error_explanation
+      %h2
+        = pluralize(monster.errors.count, "error")
+        prohibited this monster from being saved:
+      %ul
+        - monster.errors.full_messages.each do |message|
+          %li= message
+  .actions
+    = form.submit
