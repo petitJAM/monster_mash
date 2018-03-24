@@ -17,7 +17,6 @@ class MonstersController < ApplicationController
 
   def create
     @monster = Monster.new(monster_params)
-
     if @monster.save
       redirect_to @monster, notice: 'Monster was successfully created.'
     else
@@ -27,7 +26,7 @@ class MonstersController < ApplicationController
 
   def update
     if @monster.update(monster_params)
-      redirect_to @monster, notice: 'Monster was successfully updated.'
+      redirect_to edit_monster_path(@monster), notice: 'Monster was successfully updated.'
     else
       render :edit
     end

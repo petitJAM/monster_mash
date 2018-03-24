@@ -22,19 +22,28 @@ ActiveRecord::Schema.define(version: 20180323233905) do
     t.string "alignment", default: "", null: false
     t.string "challenge_rating", default: "", null: false
     t.string "languages", default: [], null: false, array: true
-    t.integer "speed", default: 0, null: false
+    t.integer "speed", default: 30, null: false
+    t.integer "burrow_speed", default: 0, null: false
     t.integer "climb_speed", default: 0, null: false
-    t.integer "swim_speed", default: 0, null: false
     t.integer "fly_speed", default: 0, null: false
+    t.integer "swim_speed", default: 0, null: false
+    t.integer "armor_class", default: 10, null: false
+    t.string "armor_source", default: "", null: false
     t.integer "hit_points", default: 0, null: false
-    t.integer "hit_die", default: 0, null: false
-    t.integer "number_of_hit_dice", default: 0, null: false
-    t.integer "strength", default: 0, null: false
-    t.integer "dexterity", default: 0, null: false
-    t.integer "constitution", default: 0, null: false
-    t.integer "intelligence", default: 0, null: false
-    t.integer "wisdom", default: 0, null: false
-    t.integer "charisma", default: 0, null: false
+    t.integer "hit_die", null: false
+    t.integer "number_of_hit_dice", default: 1, null: false
+    t.string "vulnerabilities", default: [], null: false, array: true
+    t.string "resistances", default: [], null: false, array: true
+    t.string "immunities", default: [], null: false, array: true
+    t.string "condition_immunities", default: [], null: false, array: true
+    t.string "skills", default: [], null: false, array: true
+    t.string "senses", default: [], null: false, array: true
+    t.integer "strength", null: false
+    t.integer "dexterity", null: false
+    t.integer "constitution", null: false
+    t.integer "intelligence", null: false
+    t.integer "wisdom", null: false
+    t.integer "charisma", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

@@ -1,11 +1,58 @@
-= form_with(model: monster, local: true) do |form|
-  - if monster.errors.any?
-    #error_explanation
-      %h2
-        = pluralize(monster.errors.count, "error")
-        prohibited this monster from being saved:
-      %ul
-        - monster.errors.full_messages.each do |message|
-          %li= message
-  .actions
-    = form.submit
+= simple_form_for @monster do |f|
+  = f.error_notification
+  .form-inputs
+    .columns-container
+      .columns-5
+        = f.input :name
+      .columns-5
+        = f.input :size, collection: size_options_collection, selected: selected_size_option
+      .columns-5
+        = f.input :alignment, collection: alignment_options_collection, selected: selected_alignment_option
+      .columns-5
+        = f.input :creature_type
+      .columns-5
+        = f.input :challenge_rating, collection: challenge_rating_options_collection
+
+    .columns-container
+      .columns-6
+        = f.input :strength, input_html: { value: f.object.strength || 10 }
+      .columns-6
+        = f.input :dexterity, input_html: { value: f.object.dexterity || 10 }
+      .columns-6
+        = f.input :constitution, input_html: { value: f.object.constitution || 10 }
+      .columns-6
+        = f.input :intelligence, input_html: { value: f.object.intelligence || 10 }
+      .columns-6
+        = f.input :wisdom, input_html: { value: f.object.wisdom || 10 }
+      .columns-6
+        = f.input :charisma, input_html: { value: f.object.charisma || 10 }
+
+    .columns-container
+      .columns-3
+        = f.input :armor_class, input_html: { min: 0 }
+        = f.input :armor_source
+        = f.input :hit_points, input_html: { min: 0 }
+        = f.input :hit_die, collection: hit_die_options_collection
+        = f.input :number_of_hit_dice, input_html: { min: 0 }
+
+      .columns-3
+        = f.input :speed, input_html: { step: 5, min: 0, class: 'speed-input' }
+        = f.input :burrow_speed, input_html: { step: 5, min: 0, class: 'speed-input' }
+        = f.input :climb_speed, input_html: { step: 5, min: 0, class: 'speed-input' }
+        = f.input :swim_speed, input_html: { step: 5, min: 0, class: 'speed-input' }
+        = f.input :fly_speed, input_html: { step: 5, min: 0, class: 'speed-input' }
+
+      .columns-3
+        = f.input :languages
+        = f.input :vulnerabilities
+        = f.input :resistances
+        = f.input :immunities
+        = f.input :condition_immunities
+        = f.input :skills
+        = f.input :senses
+
+  .form-actions
+    = f.submit
+
+:javascript
+  new MonsterMash.MonsterForm();

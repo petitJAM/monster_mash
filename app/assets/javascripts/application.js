@@ -11,5 +11,9 @@
 // about supported directives.
 //
 //= require rails-ujs
-//= require turbolinks
+//= require jquery
+//= require jquery-ui
+//= require_self
 //= require_tree .
+
+window.MonsterMash = {};
