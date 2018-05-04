@@ -1,4 +1,7 @@
 class Monster < ApplicationRecord
+  has_many :monster_languages, dependent: :destroy
+  has_many :languages, through: :monster_languages
+  accepts_nested_attributes_for :monster_languages, allow_destroy: true
 
   CHALLENGE_RATINGS = ['0', '1/8', '1/4', '1/2'] + (1..30).map(&:to_s)
   validates :challenge_rating, inclusion: { in: CHALLENGE_RATINGS }
@@ -9,6 +12,7 @@ class Monster < ApplicationRecord
     D8 = 8
     D10 = 10
     D12 = 12
+    D20 = 20
   end
   HIT_DICE = HitDie.constants.map &HitDie.method(:const_get)
   validates :hit_die, inclusion: { in: HIT_DICE }

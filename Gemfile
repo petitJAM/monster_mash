@@ -2,6 +2,7 @@ source 'https://rubygems.org'
 
 gem 'rails', '~> 5.1.5'
 
+gem 'awesome_print'
 gem 'coffee-rails', '~> 4.2'
 gem 'compass-rails', '~> 3.0.2'
 gem 'hamlit-rails'

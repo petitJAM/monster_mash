@@ -36,14 +36,37 @@
         = f.input :number_of_hit_dice, input_html: { min: 0 }
 
       .columns-3
-        = f.input :speed, input_html: { step: 5, min: 0, class: 'speed-input' }
-        = f.input :burrow_speed, input_html: { step: 5, min: 0, class: 'speed-input' }
-        = f.input :climb_speed, input_html: { step: 5, min: 0, class: 'speed-input' }
-        = f.input :swim_speed, input_html: { step: 5, min: 0, class: 'speed-input' }
-        = f.input :fly_speed, input_html: { step: 5, min: 0, class: 'speed-input' }
+        .columns-container
+          .columns-2
+            = f.input :speed, input_html: { step: 5, min: 0, class: 'speed-input' }
+            = f.input :burrow_speed, input_html: { step: 5, min: 0, class: 'speed-input' }
+            = f.input :swim_speed, input_html: { step: 5, min: 0, class: 'speed-input' }
+
+          .columns-2
+            = f.input :fly_speed, input_html: { step: 5, min: 0, class: 'speed-input' }
+            = f.input :climb_speed, input_html: { step: 5, min: 0, class: 'speed-input' }
 
       .columns-3
-        = f.input :languages
+        .languages.js-languages
+          .input
+            = label_tag 'Languages'
+            = text_field_tag nil, nil, class: 'js-languages-input'
+
+          - f.object.monster_languages.each do |monster_language|
+            .language
+              = f.simple_fields_for :monster_languages, monster_language do |ml|
+                = ml.input :language_id, as: :hidden
+                .name= ml.object.language.name
+
+          %template.js-language-fields-template
+            .language
+              = f.simple_fields_for :monster_languages, MonsterLanguage.new do |ml|
+                = ml.input :language_id, as: :hidden
+                .name
+
+          :javascript
+            new MonsterMash.LanguagesInput();
+
         = f.input :vulnerabilities
         = f.input :resistances
         = f.input :immunities

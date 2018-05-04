@@ -10,10 +10,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180323233905) do
+ActiveRecord::Schema.define(version: 20180504191216) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "languages", force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "monster_languages", force: :cascade do |t|
+    t.bigint "monster_id", null: false
+    t.bigint "language_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["language_id"], name: "index_monster_languages_on_language_id"
+    t.index ["monster_id"], name: "index_monster_languages_on_monster_id"
+  end
 
   create_table "monsters", force: :cascade do |t|
     t.string "name", null: false
@@ -21,7 +36,6 @@ ActiveRecord::Schema.define(version: 20180323233905) do
     t.string "creature_type", default: "", null: false
     t.string "alignment", default: "", null: false
     t.string "challenge_rating", default: "", null: false
-    t.string "languages", default: [], null: false, array: true
     t.integer "speed", default: 30, null: false
     t.integer "burrow_speed", default: 0, null: false
     t.integer "climb_speed", default: 0, null: false
@@ -48,4 +62,6 @@ ActiveRecord::Schema.define(version: 20180323233905) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "monster_languages", "languages"
+  add_foreign_key "monster_languages", "monsters"
 end

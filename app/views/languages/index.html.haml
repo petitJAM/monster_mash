@@ -1,0 +1,9 @@
+%h1 Languages
+
+%table
+  %thead
+    %th Language
+  %tbody
+    - @languages.each do |language|
+      %tr
+        %td= language.name
